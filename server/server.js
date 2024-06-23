@@ -1,20 +1,21 @@
 import express from "express";
 import ErrorHandler from "./middlewares/error-middleware.js";
-import dotenv from "dotenv";
 import userRoutes from "./routes/user-routes.js";
-import eventRoutes from "./routes/event-router.js";
+import eventRoutes from "./routes/event-routes.js";
+import { PORT } from "./config/config.js";
+import cookieParser from "cookie-parser";
 
-dotenv.config();
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const Port = PORT || 3000;
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api/users", userRoutes);
-app.use("/api/event", eventRoutes);
+app.use("/api/events", eventRoutes);
 app.use(ErrorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(Port, () => {
+  console.log(`Server is running on port ${Port}`);
 });
