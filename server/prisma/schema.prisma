@@ -32,9 +32,9 @@ model event {
   date        DateTime
   time        String
   location    String
-  image       String   @default("https://images.pexels.com/photos/976866/pexels-photo-976866.jpeg?cs=srgb&dl=pexels-joshsorenson-976866.jpg&fm=jpg")
-  user        user     @relation(fields: [userId], references: [id])
-  userId      String   @db.ObjectId
+  image       String   @default("null")
+  organizer        user     @relation(fields: [organizerId], references: [id])
+  organizerId      String   @db.ObjectId
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
