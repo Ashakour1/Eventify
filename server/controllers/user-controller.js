@@ -52,15 +52,19 @@ export const registerUser = AsyncHandler(async (req, res) => {
  * @access : public
  */
 
+
 export const loginUserController = AsyncHandler(async (req, res) => {
+  // get data from request body
   const { email, password } = req.body;
 
+  // Check if user exists
   const user = await prisma.user.findUnique({
     where: {
       email: email,
     },
   });
 
+  // Check if user exists
   if (!user) {
     res.status(400);
     throw new Error("Invalid email or password");
@@ -69,6 +73,7 @@ export const loginUserController = AsyncHandler(async (req, res) => {
   // Check if password matches
   const isMatch = await bcrypt.compare(password, user.password);
 
+  // Check if password matches with the hashed password
   if (!isMatch) {
     res.status(400);
     throw new Error("Invalid email or password");
@@ -76,10 +81,12 @@ export const loginUserController = AsyncHandler(async (req, res) => {
 
   const expiresIn = 60 * 60 * 24 * 30; // 30 days
 
+  // Generate token 
   const token = jwt.sign({ _id: user.id }, process.env.JWT_SECRET, {
     expiresIn,
   });
 
+  // Set cookie
   res.cookie("token", token, {
     httpOnly: true,
     secure: false,
@@ -95,6 +102,15 @@ export const loginUserController = AsyncHandler(async (req, res) => {
   });
 });
 
+
+// Get all users
+/**
+ * @controller get all users
+ * @method : GET
+ * @description : Get all users
+ * @route : /all
+ * @access : private
+ */
 export const getAllUsers = AsyncHandler(async (req, res) => {
   const users = await prisma.user.findMany();
   res.status(200).json({
