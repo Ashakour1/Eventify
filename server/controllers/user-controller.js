@@ -52,10 +52,14 @@ export const registerUser = AsyncHandler(async (req, res) => {
  * @access : public
  */
 
-
 export const loginUserController = AsyncHandler(async (req, res) => {
   // get data from request body
   const { email, password } = req.body;
+
+  if (!email || !password) {
+    res.status(400);
+    throw new Error("Please provide email and password");
+  }
 
   // Check if user exists
   const user = await prisma.user.findUnique({
@@ -81,7 +85,7 @@ export const loginUserController = AsyncHandler(async (req, res) => {
 
   const expiresIn = 60 * 60 * 24 * 30; // 30 days
 
-  // Generate token 
+  // Generate token
   const token = jwt.sign({ _id: user.id }, process.env.JWT_SECRET, {
     expiresIn,
   });
@@ -101,7 +105,6 @@ export const loginUserController = AsyncHandler(async (req, res) => {
     token,
   });
 });
-
 
 // Get all users
 /**
