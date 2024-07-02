@@ -3,7 +3,7 @@ import prisma from "../config/db.js";
 
 /**
  * @controller get all events controller
- * @method : POST
+ * @method : GET
  * @description : get all events from database
  * @route : /event
  * @access : public
@@ -19,7 +19,7 @@ export const getAllEvents = AsyncHandler(async (req, res) => {
 
 /**
  * @controller get single event controller
- * @method : POST
+ * @method : GET
  * @description : get single event from database
  * @route : /event/:id
  * @access : public
