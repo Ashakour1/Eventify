@@ -13,7 +13,7 @@ import jwt from "jsonwebtoken";
 export const registerUser = AsyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
-  const userExists = await prisma.user.findUnique({
+  const userExists = await prisma.User.findUnique({
     where: {
       email: req.body.email,
     },
@@ -28,7 +28,7 @@ export const registerUser = AsyncHandler(async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   // Create user
-  const user = await prisma.user.create({
+  const user = await prisma.User.create({
     data: {
       name,
       email,
@@ -62,7 +62,7 @@ export const loginUserController = AsyncHandler(async (req, res) => {
   }
 
   // Check if user exists
-  const user = await prisma.user.findUnique({
+  const user = await prisma.User.findUnique({
     where: {
       email: email,
     },
@@ -115,7 +115,7 @@ export const loginUserController = AsyncHandler(async (req, res) => {
  * @access : private
  */
 export const getAllUsers = AsyncHandler(async (req, res) => {
-  const users = await prisma.user.findMany();
+  const users = await prisma.User.findMany();
   res.status(200).json({
     success: true,
     data: users,

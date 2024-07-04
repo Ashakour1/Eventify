@@ -10,7 +10,7 @@ import prisma from "../config/db.js";
  */
 
 export const getAllEvents = AsyncHandler(async (req, res) => {
-    const events = await prisma.event.findMany();
+    const events = await prisma.Event.findMany();
     res.status(200).json({
         success: true,
         data: events,
@@ -26,7 +26,7 @@ export const getAllEvents = AsyncHandler(async (req, res) => {
  */
 
 export const getSingleEvent = AsyncHandler(async (req, res) => {
-    const event = await prisma.event.findUnique({
+    const event = await prisma.Event.findUnique({
         where: {
             id: req.params.id,
         },
