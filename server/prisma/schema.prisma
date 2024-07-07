@@ -24,12 +24,6 @@ model User {
   events    Event[]
 }
 
-model EventType {
-  id    String  @id @default(auto()) @map("_id") @db.ObjectId
-  name  String  @unique
-  events Event[]
-}
-
 model Event {
   id          String       @id @default(auto()) @map("_id") @db.ObjectId
   title       String
@@ -38,10 +32,10 @@ model Event {
   time        String
   location    String
   image       String       @default("null")
+  eventType   String
   link        String?      // Optional link field
   organizer   User         @relation(fields: [organizerId], references: [id])
   organizerId String       @db.ObjectId
-  eventType   EventType    @relation(fields: [eventTypeId], references: [id])
   eventTypeId String       @db.ObjectId
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
