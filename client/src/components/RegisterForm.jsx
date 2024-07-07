@@ -20,6 +20,7 @@ const RegisterForm = () => {
     password: "",
   });
 
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
