@@ -11,11 +11,23 @@ import jwt from "jsonwebtoken";
  * @access : public
  */
 export const registerUser = AsyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { username, email, password } = req.body;
 
-  const userExists = await prisma.user.findUnique({
+  if (!username || !email || !password) {
+    res.status(400);
+    throw new Error("Please provide username, email and password");
+  }
+
+  const userExists = await prisma.user.findFirst({
     where: {
-      email: req.body.email,
+      OR: [
+        {
+          email: email,
+        },
+        {
+          username: username,
+        },
+      ],
     },
   });
 
@@ -30,7 +42,7 @@ export const registerUser = AsyncHandler(async (req, res) => {
   // Create user
   const user = await prisma.user.create({
     data: {
-      name,
+      username,
       email,
       password: hashedPassword,
     },
@@ -54,9 +66,9 @@ export const registerUser = AsyncHandler(async (req, res) => {
 
 export const loginUserController = AsyncHandler(async (req, res) => {
   // get data from request body
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
-  if (!email || !password) {
+  if (!username || !password) {
     res.status(400);
     throw new Error("Please provide email and password");
   }
@@ -64,7 +76,7 @@ export const loginUserController = AsyncHandler(async (req, res) => {
   // Check if user exists
   const user = await prisma.user.findUnique({
     where: {
-      email: email,
+      username: username,
     },
   });
 
