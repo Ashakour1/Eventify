@@ -33,6 +33,8 @@ model event {
   time        String
   location    String
   image       String   @default("null")
+  eventType   String
+  link        String
   organizer        user     @relation(fields: [organizerId], references: [id])
   organizerId      String   @db.ObjectId
   createdAt   DateTime @default(now())
