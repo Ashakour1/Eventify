@@ -1,9 +1,11 @@
 import "./App.css";
+import { Button } from "./components/ui/button";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
     <div className="App">
-      <h1>Eventify</h1>
+      <RegisterPage />
     </div>
   );
 }
