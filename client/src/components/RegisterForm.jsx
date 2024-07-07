@@ -20,7 +20,7 @@ const RegisterForm = () => {
     password: "",
   });
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -35,10 +35,32 @@ const RegisterForm = () => {
     });
   };
 
+  const validate = () => {
+    let errors = {};
+
+    if (!formData.username) {
+      errors.username = "Username is required";
+    }
+    if (!formData.email) {
+      errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "Email address is invalid";
+    }
+    if (!formData.password) {
+      errors.password = "Password is required";
+    }
+
+    setError(errors);
+    return Object.keys(errors).length === 0;
+  };
   console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validate()) {
+      return;
+    }
     setLoading(true);
     try {
       const { data } = await axios.post("api/users/auth/signup", formData);
@@ -74,17 +96,23 @@ const RegisterForm = () => {
                   id="username"
                   placeholder="Enter your Username"
                 />
+                {error.username && (
+                  <p className="text-red-500 text-sm">{error.username}</p>
+                )}
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="email">Email</Label>
                 <Input
-                  type="email"
+                  type="text"
                   name="email"
                   onChange={handleChange}
                   value={formData.email}
                   id="email"
                   placeholder="Enter your Email"
                 />
+                {error.email && (
+                  <p className="text-red-500 text-sm">{error.email}</p>
+                )}
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="password">Password</Label>
@@ -97,6 +125,9 @@ const RegisterForm = () => {
                   placeholder="Enter your password"
                   onChange={handleChange}
                 />
+                {error.password && (
+                  <p className="text-red-500 text-sm">{error.password}</p>
+                )}
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Button className="bg-blue-500 hover:bg-blue-0" type="submit">
