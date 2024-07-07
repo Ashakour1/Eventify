@@ -26,6 +26,14 @@ const RegisterForm = () => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  const ClearText = () => {
+    setFormData({
+      username: "",
+      email: "",
+      password: "",
+    });
+  };
+
   console.log(formData);
 
   const handleSubmit = async (e) => {
@@ -35,11 +43,7 @@ const RegisterForm = () => {
       const { data } = await axios.post("api/users/auth/signup", formData);
       toast.success(data.message);
       setLoading(false);
-      setFormData({
-        username: "",
-        email: "",
-        password: "",
-      });
+      ClearText();
     } catch (error) {
       setLoading(false);
       toast.error(error.response.data.message);
