@@ -1,26 +1,35 @@
+import Header from "@/components/Header";
+import { Button } from "@/components/ui/button";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <main>
-      <div className="max-w-[1240px] pt-16 mx-auto h-full flex flex-col items-center">
-        <div className="text-center px-4">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-            Manage with Ease, Impress with Results
+    <main className="">
+      <div className="max-w-[1140px] mx-auto min-h-screen">
+        <div className="flex flex-col justify-center items-center text-center w-9/12 mx-auto pt-14 space-y-3">
+          <h1 className="text-3xl font-bold">
+            Effortlessly Plan, Manage, and Enjoy Your Events with Efficient
+            Tools
           </h1>
-          <p className="text-base md:text-lg text-gray-500 mt-4 max-w-[600px] mx-auto">
-            Eventify combines all the tools you need to plan, manage, and execute events into one platform. Enjoy the endless possibilities of creating perfect events with minimal effort.
+          <p className="text-lg text-gray-500 ">
+            Eventify offers a comprehensive solution for event planning. Create
+            events, manage attendees, and handle ticketing all in one place.
+            With real-time updates and user authentication, organizing events
+            has never been easier.
           </p>
-          <div className="flex justify-center gap-4 mt-6">
-            <Link to="/events">
-              <button className="py-2 px-4 md:py-3 md:px-6 bg-gray-200 text-gray-800 rounded-md text-sm font-medium hover:bg-gray-300 transition-colors">
-                Explore Events
+          <div className="flex gap-4">
+            <Link to="/register">
+              <button
+                type="button"
+                className="border-customBlue rounded-md border-2 bg-customBlue hover:bg-customBlue/90 px-6 py-2 text-white"
+              >
+                Get Started
               </button>
             </Link>
-            <Link to="/contact">
-              <button className="py-2 px-4 md:py-3 md:px-6 border border-gray-300 text-gray-800 rounded-md text-sm font-medium hover:bg-gray-100 transition-colors">
-                Contact Us
+            <Link to="/">
+              <button className="border-customBlue rounded-md border-2 bg-transparent hover:bg-none px-6 py-2 text-black hover:bg-customBlue/45 hover:text-white">
+                Learn More
               </button>
             </Link>
           </div>
