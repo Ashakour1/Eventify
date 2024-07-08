@@ -1,29 +1,28 @@
-import React from "react";
-import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
 
 const Header = () => {
   return (
-    <header className="bg-customBlue rounded-2xl mx-10 my-4">
-      <div className="flex justify-between items-center max-w-[1140px] mx-auto h-16 mt-1">
+    <header className="bg-green-300 mx-20 my-2 rounded px-4 py-2">
+      <div className="max-w-[1200px] mx-auto flex justify-between items-center ">
         <div className="logo">
           <Link to="/">
-            <img src={logo} alt="" className="w-10" />
+            <p className="text-2xl font-bold">Eventify</p>
           </Link>
         </div>
-        <div className="hidden md:flex gap-3 text-center items-center">
-          <Link className="font-medium p-2" to="/">
-            Home
+        <div className="hidden md:flex items-center space-x-3">
+          <Link className="text-sm p-2" to="/">
+            About Us
           </Link>
-          <Link className="font-medium p-2" to="/events">
+          <Link className="text-sm p-2 " to="/events">
             Events
           </Link>
-          <Link className="font-medium p-2" to="/about">
-            About
-          </Link>
-          <Link className="font-medium p-2" to="/contact">
+          <Link className="text-sm p-2 " to="/contact">
             Contact Us
           </Link>
+          <Button className="rounded-none">
+            <Link to="/reg">Get Started</Link>
+          </Button>
         </div>
       </div>
     </header>
