@@ -32,7 +32,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       colors: {
-        customBlue: "#86A6F8",
+        customBlue: "#3b82f6",
       },
     },
   },
