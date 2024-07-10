@@ -1,17 +1,49 @@
+"use client";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { Link } from "react-router-dom";
+import { TypewriterEffect } from "@/components/ui/typewriter-effect";
 
 const HeroSection = () => {
+  const words = [
+    {
+      text: "Effortlessly",
+      className: "text-[35px]",
+    },
+    {
+      text: "Plan ,",
+      className: "text-[35px]",
+    },
+    {
+      text: "Manage ,",
+      className: "text-[35px]",
+    },
+    {
+      text: "Enjoy",
+      className: "text-[35px]",
+    },
+    {
+      text: "Events",
+      className: "text-[35px]",
+    },
+    {
+      text: "With",
+      className: "text-[35px]",
+    },
+    {
+      text: "Eventify.",
+      className: "text-[35px] text-customBlue",
+    },
+  ];
+
+ 
   return (
     <main className="">
-      <div className="max-w-[1140px] mx-auto min-h-screen">
-        <div className="flex flex-col justify-center items-center text-center w-9/12 mx-auto pt-14 space-y-3">
-          <h1 className="text-3xl font-bold">
-            Effortlessly Plan, Manage, and Enjoy Your Events with Efficient
-            Tools
-          </h1>
+      <div className="max-w-[1040px] mx-auto min-h-screen">
+        <div className="flex flex-col justify-center items-center text-center w-9/12 mx-auto pt-24 space-y-6">
+          <TypewriterEffect words={words} fontSize="text-3xl" />
+
           <p className="text-lg text-gray-500 ">
             Eventify offers a comprehensive solution for event planning. Create
             events, manage attendees, and handle ticketing all in one place.
@@ -22,13 +54,13 @@ const HeroSection = () => {
             <Link to="/register">
               <button
                 type="button"
-                className="border-customBlue rounded-md border-2 bg-customBlue hover:bg-customBlue/90 px-6 py-2 text-white"
+                className="border-customBlue rounded-md border-2 bg-customBlue hover:bg-customBlue/90 px-6 py-2 text-white font-semibold"
               >
                 Get Started
               </button>
             </Link>
             <Link to="/">
-              <button className="border-customBlue rounded-md border-2 bg-transparent hover:bg-none px-6 py-2 text-black hover:bg-customBlue/45 hover:text-white">
+              <button className="border-customBlue rounded-md border-2 bg-transparent hover:bg-none px-6 py-2 text-black font-semibold">
                 Learn More
               </button>
             </Link>
