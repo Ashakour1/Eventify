@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 
 const Header = () => {
   return (
-    <header className="bg-green-300 mx-20 my-2 rounded px-4 py-2">
+    <header className="border-b-2 mx-20 my-2 rounded px-4 py-2">
       <div className="max-w-[1200px] mx-auto flex justify-between items-center ">
         <div className="logo">
           <Link to="/">
@@ -11,13 +11,13 @@ const Header = () => {
           </Link>
         </div>
         <div className="hidden md:flex items-center space-x-3">
-          <Link className="text-sm p-2" to="/">
+          <Link className="text-sm p-2 font-medium" to="/">
             About Us
           </Link>
-          <Link className="text-sm p-2 " to="/events">
+          <Link className="text-sm p-2 font-medium " to="/events">
             Events
           </Link>
-          <Link className="text-sm p-2 " to="/contact">
+          <Link className="text-sm p-2 font-medium " to="/contact">
             Contact Us
           </Link>
           <Button className="rounded-none">
