@@ -4,9 +4,10 @@ import HeroSection from "./pages/Hero-section";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContectPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import RegisterPage from "./pages/RegisterPage";
+import RegisterPage from "./pages/Register-page";
 import { Toaster } from "react-hot-toast";
 import NotFound from "./components/NotFound";
+import LoginPage from "./pages/Login-page";
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<LoginPage/>}
+          />
         </Routes>
       </Router>
     </>
