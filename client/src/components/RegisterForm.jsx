@@ -75,7 +75,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full px-5 md:px-0">
       <Card className="">
         <CardHeader>
           <CardTitle className="text-customBlue">Register Form </CardTitle>
