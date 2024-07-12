@@ -15,7 +15,7 @@ export const sendEmail = AsyncHandler(async (req, res) => {
     const { firstName, lastName, email, phone, subject, message } = req.body;
   
     const response = await resend.emails.send({
-      from: email,
+      from: 'onboarding@resend.dev',
       to: 'zakariyem367@gmail.com',
       subject: subject,
       html: `
