@@ -61,7 +61,7 @@ const LoginForm = () => {
                       ></path>
                     </svg>
                   ) : (
-                    "Register"
+                    "Login"
                   )}
                 </Button>
               </div>
@@ -69,9 +69,9 @@ const LoginForm = () => {
           </form>
         </CardContent>
         <CardFooter className="justify-center flex items-center text-center">
-          Have an account?&nbsp;
+          Don&apos;t have an account?&nbsp;
           <Link to="/register" className="font-bold text-customBlue">
-            Login
+            Register
           </Link>
         </CardFooter>
       </Card>
