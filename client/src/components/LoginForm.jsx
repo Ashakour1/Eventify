@@ -71,7 +71,7 @@ const LoginForm = () => {
         <CardFooter className="justify-center flex items-center text-center">
           Have an account?&nbsp;
           <Link to="/register" className="font-bold text-customBlue">
-            Register
+            Login
           </Link>
         </CardFooter>
       </Card>
