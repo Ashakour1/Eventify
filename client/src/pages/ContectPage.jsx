@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios'; // Importing axios for HTTP requests
 import {
   FaPhone,
   FaEnvelope,
@@ -7,6 +8,7 @@ import {
   FaInstagram,
   FaDiscord,
 } from 'react-icons/fa';
+import { toast } from 'sonner'; // Importing toast from sonner
 
 export default function ContactPage() {
   // State to manage form data
@@ -19,8 +21,17 @@ export default function ContactPage() {
     message: '',
   });
 
-  // State to manage the submission status
-  const [status, setStatus] = useState('');
+  // Clear the form data
+  const ClearText = () => {
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: '',
+    });
+  };
 
   // Function to handle input changes and update form data state
   const handleChange = (e) => {
@@ -35,31 +46,23 @@ export default function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Sending the form data to the backend endpoint
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      // Sending the form data to the backend endpoint using axios
+      const response = await axios.post('/api/contact', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
-      if (response.ok) {
-        setStatus('Email sent successfully!');
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: '',
-        })
-      } else {
-        setStatus(`Error: ${result.message}`);
-      }
+      toast.success(response.data.message);
+      console.log(response.data.message);
+      //ClearText();
     } catch (error) {
-      setStatus(`Error: ${error.message}`);
+      ClearText();
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('An error occurred. Please try again.');
+      }
     }
   };
 
@@ -212,7 +215,6 @@ export default function ContactPage() {
         >
           Send Message
         </button>
-        {status && <p className="mt-4 text-center">{status}</p>}
       </form>
     </div>
   );
