@@ -5,14 +5,14 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContectPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RegisterPage from "./pages/Register-page";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "sonner";
 import NotFound from "./components/NotFound";
 import LoginPage from "./pages/Login-page";
 
 function App() {
   return (
     <>
-      <Toaster />
+      <Toaster richColors position="top-center" />
       <Router>
         <Header />
         <Routes>

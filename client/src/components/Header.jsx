@@ -21,7 +21,7 @@ const Header = () => {
             Contact Us
           </Link>
           <Button className="rounded-none bg-blue-500">
-            <Link to="/reg" >Get Started</Link>
+            <Link to="/register">Get Started</Link>
           </Button>
         </div>
       </div>
