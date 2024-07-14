@@ -45,6 +45,14 @@ export default function ContactPage() {
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validation check
+    const { firstName, lastName, email, phone, subject, message } = formData;
+    if (!firstName || !lastName || !email || !phone || !subject || !message) {
+      toast.error('Please fill out all required fields.');
+      return;
+    }
+
     try {
       // Sending the form data to the backend endpoint using axios
       const response = await axios.post('/api/contact', formData, {
