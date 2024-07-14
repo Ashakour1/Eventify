@@ -1,6 +1,6 @@
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -49,13 +49,13 @@ const LoginForm = () => {
                 <Button className="bg-blue-500 hover:bg-blue-0" type="submit">
                   {loading ? (
                     <svg
-                      class="animate-spin border-white border-2 rounded-full h-5 w-5 mr-3"
+                      className="animate-spin border-white border-2 rounded-full h-5 w-5 mr-3"
                       viewBox="0 0 24 24"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        class="opacity-75"
+                        className="opacity-75"
                         fill="currentColor"
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
                       ></path>
