@@ -21,6 +21,10 @@ export default function ContactPage() {
     message: '',
   });
 
+  // Loading state
+  const [loading, setLoading] = useState(false);
+
+
   // Clear the form data
   const ClearText = () => {
     setFormData({
@@ -31,6 +35,15 @@ export default function ContactPage() {
       subject: '',
       message: '',
     });
+  };
+
+  // Function to validate form data
+  const validate = () => {
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.subject || !formData.message) {
+      toast.error('Please fill in all required fields.');
+      return false;
+    }
+    return true;
   };
 
   // Function to handle input changes and update form data state
@@ -47,12 +60,12 @@ export default function ContactPage() {
     e.preventDefault();
     
     // Validation check
-    const { firstName, lastName, email, phone, subject, message } = formData;
-    if (!firstName || !lastName || !email || !phone || !subject || !message) {
-      toast.error('Please fill out all required fields.');
+    if (!validate()) {
       return;
     }
 
+    setLoading(true);
+    
     try {
       // Sending the form data to the backend endpoint using axios
       const response = await axios.post('/api/contact', formData, {
@@ -62,14 +75,19 @@ export default function ContactPage() {
       });
 
       toast.success(response.data.message);
+      setLoading(false);
       console.log(response.data.message);
       //ClearText();
     } catch (error) {
       ClearText();
       if (error.response && error.response.data) {
         toast.error(error.response.data.message);
+        setLoading(false);
+        ClearText();
       } else {
         toast.error('An error occurred. Please try again.');
+        setLoading(false);
+        ClearText();
       }
     }
   };
@@ -221,7 +239,22 @@ export default function ContactPage() {
           type="submit"
           className="bg-black text-white px-6 py-2 rounded shadow hover:bg-gray-800"
         >
-          Send Message
+          {loading ? (
+                    <svg
+                      className="animate-spin border-white border-2 rounded-full h-5 w-5 mr-3"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      ></path>
+                    </svg>
+                  ) : (
+                    "Send Message"
+                  )}
         </button>
       </form>
     </div>
