@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   FaPhone,
   FaEnvelope,
@@ -5,11 +6,66 @@ import {
   FaTwitter,
   FaInstagram,
   FaDiscord,
-} from "react-icons/fa";
+} from 'react-icons/fa';
 
 export default function ContactPage() {
+  // State to manage form data
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: '',
+  });
+
+  // State to manage the submission status
+  const [status, setStatus] = useState('');
+
+  // Function to handle input changes and update form data state
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Sending the form data to the backend endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setStatus('Email sent successfully!');
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: '',
+        })
+      } else {
+        setStatus(`Error: ${result.message}`);
+      }
+    } catch (error) {
+      setStatus(`Error: ${error.message}`);
+    }
+  };
+
   return (
     <div className="flex flex-col lg:flex-row items-center justify-around min-h-screen lg:space-x-8">
+      {/* Contact Information Section */}
       <div className="bg-gray-400 p-8 rounded-lg shadow-lg text-white w-full lg:w-1/3 flex flex-col justify-between">
         <div>
           <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
@@ -33,7 +89,9 @@ export default function ContactPage() {
           <FaDiscord className="w-6 h-6 cursor-pointer" />
         </div>
       </div>
-      <form className="bg-white p-8 rounded-lg shadow-lg">
+
+      {/* Contact Form Section */}
+      <form className="bg-white p-8 rounded-lg shadow-lg" onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
             <label htmlFor="firstName" className="block text-gray-700">
@@ -42,7 +100,10 @@ export default function ContactPage() {
             <input
               type="text"
               id="firstName"
+              name="firstName"
               className="mt-1 p-2 w-full border rounded"
+              value={formData.firstName}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -52,8 +113,10 @@ export default function ContactPage() {
             <input
               type="text"
               id="lastName"
+              name="lastName"
               className="mt-1 p-2 w-full border rounded"
-              defaultValue="Doe"
+              value={formData.lastName}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -65,7 +128,10 @@ export default function ContactPage() {
             <input
               type="email"
               id="email"
+              name="email"
               className="mt-1 p-2 w-full border rounded"
+              value={formData.email}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -75,8 +141,10 @@ export default function ContactPage() {
             <input
               type="tel"
               id="phone"
+              name="phone"
               className="mt-1 p-2 w-full border rounded"
-              defaultValue="+1012 3456 789"
+              value={formData.phone}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -84,19 +152,43 @@ export default function ContactPage() {
           <label className="block text-gray-700">Select Subject</label>
           <div className="flex space-x-4 mt-2">
             <label className="flex items-center">
-              <input type="radio" name="subject" className="mr-2" />
+              <input
+                type="radio"
+                name="subject"
+                value="General Inquiry"
+                className="mr-2"
+                onChange={handleChange}
+              />
               <span>General Inquiry</span>
             </label>
             <label className="flex items-center">
-              <input type="radio" name="subject" className="mr-2" />
+              <input
+                type="radio"
+                name="subject"
+                value="Event Support"
+                className="mr-2"
+                onChange={handleChange}
+              />
               <span>Event Support</span>
             </label>
             <label className="flex items-center">
-              <input type="radio" name="subject" className="mr-2" />
+              <input
+                type="radio"
+                name="subject"
+                value="Technical Issue"
+                className="mr-2"
+                onChange={handleChange}
+              />
               <span>Technical Issue</span>
             </label>
             <label className="flex items-center">
-              <input type="radio" name="subject" className="mr-2" />
+              <input
+                type="radio"
+                name="subject"
+                value="Feedback"
+                className="mr-2"
+                onChange={handleChange}
+              />
               <span>Feedback</span>
             </label>
           </div>
@@ -107,7 +199,10 @@ export default function ContactPage() {
           </label>
           <textarea
             id="message"
+            name="message"
             className="mt-1 p-2 w-full border rounded"
+            value={formData.message}
+            onChange={handleChange}
             placeholder="Write your message.."
           ></textarea>
         </div>
@@ -117,6 +212,7 @@ export default function ContactPage() {
         >
           Send Message
         </button>
+        {status && <p className="mt-4 text-center">{status}</p>}
       </form>
     </div>
   );
