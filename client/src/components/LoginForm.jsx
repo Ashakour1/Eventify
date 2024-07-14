@@ -70,8 +70,8 @@ const LoginForm = () => {
         </CardContent>
         <CardFooter className="justify-center flex items-center text-center">
           Have an account?&nbsp;
-          <Link to="/login" className="font-bold text-customBlue">
-            Login
+          <Link to="/register" className="font-bold text-customBlue">
+            Register
           </Link>
         </CardFooter>
       </Card>
