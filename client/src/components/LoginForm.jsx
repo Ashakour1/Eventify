@@ -1,6 +1,7 @@
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -22,7 +23,16 @@ const LoginForm = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
   const { login, user } = useUser();
+
+  const redirecTo = location.search.split("/")[1];
+
+  useEffect(() => {
+    if (user) {
+      redirecTo ? navigate(`/${redirecTo}`) : navigate("/dashboard");
+    }
+  }, [user, redirecTo]);
 
   const [loading, setLoading] = useState(false);
 
@@ -38,6 +48,7 @@ const LoginForm = () => {
       console.log(data);
       toast.success(data.message);
       login(data, data.expiresIn);
+      navigate("/dashboard");
       setLoading(false);
     } catch (err) {
       setLoading(false);
