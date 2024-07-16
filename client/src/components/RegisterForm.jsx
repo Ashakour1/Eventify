@@ -11,8 +11,8 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import axios from "axios";
-import { toast } from 'sonner'; 
-import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -20,6 +20,7 @@ const RegisterForm = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -67,6 +68,7 @@ const RegisterForm = () => {
       toast.success(data.message);
       setLoading(false);
       ClearText();
+      navigate("/login");
     } catch (error) {
       setLoading(false);
       toast.error(error.response.data.message);
