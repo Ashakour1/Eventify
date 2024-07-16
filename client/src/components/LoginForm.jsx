@@ -12,8 +12,39 @@ import {
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 
+import { useUser } from "../Hooks/useUser";
+import axios from "axios";
+import toast from "react-hot-toast";
+
 const LoginForm = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const { login, user } = useUser();
+
   const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const { data } = await axios.post("/api/users/auth/login", formData);
+      console.log(data);
+      toast.success(data.message);
+      login(data, data.expiresIn);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+    }
+  };
+
   return (
     <div className="w-full px-5 md:px-0">
       <Card>
@@ -24,7 +55,7 @@ const LoginForm = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="username">Username</Label>
@@ -32,6 +63,8 @@ const LoginForm = () => {
                   type="text"
                   name="username"
                   id="username"
+                  value={formData.username}
+                  onChange={handleChange}
                   placeholder="Enter your Username"
                 />
               </div>
@@ -41,6 +74,8 @@ const LoginForm = () => {
                   name="password"
                   type="password"
                   id="password"
+                  value={formData.password}
+                  onChange={handleChange}
                   className="focus-none"
                   placeholder="Enter your password"
                 />
