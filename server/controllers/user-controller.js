@@ -115,6 +115,7 @@ export const loginUserController = AsyncHandler(async (req, res) => {
     message: "Login successfully ",
     data: user,
     token,
+    expiresIn,
   });
 });
 

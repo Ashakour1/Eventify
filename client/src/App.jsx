@@ -2,10 +2,10 @@ import "./App.css";
 import Header from "./components/Header";
 import HeroSection from "./pages/Hero-section";
 import AboutPage from "./pages/AboutPage";
-import ContactPage from "./pages/ContectPage";
+import ContactPage from "./pages/ContactPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RegisterPage from "./pages/Register-page";
-import { Toaster } from "sonner";
+import { Toaster } from "react-hot-toast";
 import NotFound from "./components/NotFound";
 import LoginPage from "./pages/Login-page";
 import { Dashboard } from "./pages/Dashboard";
@@ -14,8 +14,12 @@ import { HelmetProvider } from 'react-helmet-async';
 function App() {
   return (
     <>
+ Dashboard
       <HelmetProvider>
-      <Toaster richColors position="top-center" />
+     
+
+      <Toaster />
+
       <Router>
         <Header />
         <Routes>
@@ -25,7 +29,9 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/login" element={<LoginPage />} />
+
           <Route path="/dashboard" element={<Dashboard />} />
+
         </Routes>
       </Router>
     </HelmetProvider>

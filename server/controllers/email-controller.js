@@ -1,7 +1,7 @@
 import AsyncHandler from "express-async-handler";
 import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { Resend_API_KEY } from "../config/config.js";
+const resend = new Resend(Resend_API_KEY);
 
 /**
  * @controller send email controller
