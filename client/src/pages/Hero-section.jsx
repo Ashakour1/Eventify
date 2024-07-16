@@ -42,13 +42,13 @@ const HeroSection = () => {
   return (
     <main className="">
       <div className="max-w-[1040px] mx-auto h-[540px]">
-        <div className="flex flex-col justify-center items-center text-center w-9/12 mx-auto pt-10 space-y-6">
+        <div className="flex flex-col justify-center  items-center text-center md:w-9/12 mx-auto md:px-0 px-2 pt-10 space-y-6">
           <div className="inset-0">
             <Link
               className="px-3  text-sm font-medium inline-flex items-center justify-center border rounded-full  text-zinc-600 hover:text-black transition duration-150 ease-in-out w-full group border-black"
               to="/contact"
             >
-              <span className="relative inline-flex items-center">
+              <span className=" inline-flex items-center">
                 Contact Us
                 <span className="tracking-normal text-primary-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
                   -&gt;
@@ -86,7 +86,6 @@ const HeroSection = () => {
             ></FaArrowDown>
           </div>
         </div>
-        <QuickFindAnswers />
       </div>
     </main>
   );
