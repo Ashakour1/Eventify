@@ -9,6 +9,8 @@ import { Toaster } from "react-hot-toast";
 import NotFound from "./components/NotFound";
 import LoginPage from "./pages/Login-page";
 import { Dashboard } from "./pages/Dashboard";
+import QuickFindAnswers from "./components/QuickFindAnswers";
+import Upcoming from "./components/UpcomingEvents";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
               <>
                 <Header />
                 <HeroSection />
+                <QuickFindAnswers />
+                <Upcoming/>
               </>
             }
           />
