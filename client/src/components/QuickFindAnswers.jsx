@@ -3,8 +3,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const QuickFindAnswers = () => {
   return (
-    <section>
-      <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+    <section className="max-w-[1140px] mx-auto h-[600px] mt-20">
+    <div className="md:pt-0 pt-32">
+    <h2 className="text-2xl font-semibold mb-2">
+        Quick Find Answers
+      </h2>
+      <p className=" text-gray-500">
+        Get answers to common questions about Eventify.
+      </p>
+    </div>
+      <div className=" grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 pt-10 md:px-0 px-5">
         <Card x-chunk="dashboard-01-chunk-0">
           <CardHeader className="flex flex-col items-center justify-center pb-3">
             <FaInfoCircle className="h-4 w-4" />
