@@ -15,22 +15,69 @@ function App() {
     <>
       <Toaster />
       <Router>
-        <Header />
         <Routes>
           <Route
             path="/"
             element={
               <>
+                <Header />
                 <HeroSection />
               </>
             }
           />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="*"
+            element={
+              <>
+                <Header />
+                <NotFound />
+              </>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <>
+                <Header />
+                <RegisterPage />
+              </>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <>
+                <Header />
+                <AboutPage />
+              </>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <>
+                <Header />
+                <ContactPage />
+              </>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <>
+                <Header />
+                <LoginPage />
+              </>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <>
+                <Dashboard />
+              </>
+            }
+          />
         </Routes>
       </Router>
     </>
