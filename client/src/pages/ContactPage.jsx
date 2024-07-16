@@ -103,21 +103,23 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="w-full">
-      <section className="bg-muted py-12 md:py-20 lg:py-24">
+    <div className="max-w-[1200px] mx-auto">
+      <section className="bg-muted py-12 md:py-20 lg:py-8">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h2 className="text-3xl font-bold md:text-4xl">Get in Touch</h2>
-                <p className="text-muted-foreground md:text-lg">
+            <div className="space-y-6 md:px-0 px-3">
+              <div className="space-y-4 ">
+                <h2 className="text-3xl  text-customBlue font-bold md:text-4xl">
+                  Get in Touch
+                </h2>
+                <p className="text-muted-foreground text-gray-500 md:text-lg">
                   Have a question or want to work together? Fill out the form or
                   use the contact information below.
                 </p>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-4 ">
                 <div className="flex items-start gap-4">
-                  <FaMapMarkerAlt className="h-6 w-6 text-primary" />
+                  <FaMapMarkerAlt className="h-6 w-6 text-customBlue" />
                   <div>
                     <h3 className="font-medium">Address</h3>
                     <p className="text-muted-foreground">
@@ -126,14 +128,14 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <FaPhone className="h-6 w-6 text-primary" />
+                  <FaPhone className="h-6 w-6 text-customBlue" />
                   <div>
                     <h3 className="font-medium">Phone</h3>
                     <p className="text-muted-foreground">(123) 456-7890</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <FaEnvelope className="h-6 w-6 text-primary" />
+                  <FaEnvelope className="h-6 w-6 text-customBlue" />
                   <div>
                     <h3 className="font-medium">Email</h3>
                     <p className="text-muted-foreground">
@@ -264,7 +266,7 @@ export default function ContactPage() {
                 </div>
                 <Button
                   type="submit"
-                  className="bg-black w-full text-white px-6 py-2 rounded shadow hover:bg-gray-800"
+                  className="bg-customBlue w-full text-white px-6 py-2 rounded shadow hover:bg-gray-800"
                 >
                   {loading ? (
                     <svg
