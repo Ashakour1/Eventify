@@ -8,12 +8,14 @@ import RegisterPage from "./pages/Register-page";
 import { Toaster } from "sonner";
 import NotFound from "./components/NotFound";
 import LoginPage from "./pages/Login-page";
+import { Dashboard } from "./pages/Dashboard";
 
 function App() {
   return (
     <>
       <Toaster richColors position="top-center" />
       <Router>
+        
         <Header />
         <Routes>
           <Route
@@ -28,8 +30,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/login" element={<LoginPage/>}
-          />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
     </>
