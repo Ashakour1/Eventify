@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Activity,
   ArrowUpRight,
@@ -11,6 +11,7 @@ import {
   Users,
 } from "lucide-react";
 
+import { useUser } from "../Hooks/useUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -39,8 +40,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useEffect } from "react";
 
 export function Dashboard() {
+  const navigate = useNavigate();
+  const { user, logout } = useUser();
+
+  const location = useLocation();
+  const redirectTo = location.pathname;
+
+  useEffect(() => {
+    if (!user) {
+      navigate(`/login?redirectTo=${redirectTo}`);
+    }
+  }, [user, navigate]);
+
   return (
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -157,7 +171,7 @@ export function Dashboard() {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
