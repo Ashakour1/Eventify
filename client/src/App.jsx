@@ -9,23 +9,17 @@ import { Toaster } from "sonner";
 import NotFound from "./components/NotFound";
 import LoginPage from "./pages/Login-page";
 import { Dashboard } from "./pages/Dashboard";
+import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
   return (
     <>
+      <HelmetProvider>
       <Toaster richColors position="top-center" />
       <Router>
-        
         <Header />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <HeroSection />
-              </>
-            }
-          />
+          <Route path="/" element={<HeroSection />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/about" element={<AboutPage />} />
@@ -34,6 +28,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
+    </HelmetProvider>
     </>
   );
 }

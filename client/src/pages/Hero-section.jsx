@@ -1,10 +1,8 @@
 "use client";
-import Header from "@/components/Header";
-import { Button } from "@/components/ui/button";
-import React from "react";
 import { Link } from "react-router-dom";
 import { TypewriterEffect } from "@/components/ui/typewriter-effect";
 import { FaArrowDown } from "react-icons/fa";
+import QuickFindAnswersPage from "../components/QuickFindAnswers"; 
 
 const HeroSection = () => {
   const words = [
@@ -78,7 +76,7 @@ const HeroSection = () => {
               </button>
             </Link>
           </div>
-          <div class="  items-center pt-32  ">
+          <div className="items-center pt-32">
             <FaArrowDown
               icon="mdi:arrow-down"
               className="text-3xl text-blue-500 animate-bounce w-6 h-6"
@@ -86,6 +84,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+      <QuickFindAnswersPage />
     </main>
   );
 };
