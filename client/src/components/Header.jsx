@@ -17,9 +17,6 @@ const Header = () => {
           <Link className="text-sm p-2 font-medium " to="/events">
             Events
           </Link>
-          <Link className="text-sm p-2 font-medium " to="/dashboard">
-            Dashboard
-          </Link>
           <Link className="text-sm p-2 font-medium " to="/contact">
             Contact Us
           </Link>
