@@ -6,8 +6,11 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const logout = () => {
-    localStorage.removeItem("userData");
-    localStorage.removeItem("expiresIn");
+    if (confirm("Are you sure you want to log out")) {
+      localStorage.removeItem("userData");
+      localStorage.removeItem("expiresIn");
+      setUser(null);
+    }
   };
 
   useEffect(() => {
@@ -23,7 +26,7 @@ export const UserProvider = ({ children }) => {
         logout();
       }
     }
-  },[]);
+  }, []);
 
   const login = (userData, expiresIn) => {
     const expireTime = new Date().getTime() + expiresIn * 1000;
