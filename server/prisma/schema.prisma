@@ -36,7 +36,7 @@ model event {
   eventType   String
   link        String?
   organizer        user     @relation(fields: [organizerId], references: [id])
-  organizerId      String   @db.ObjectId
+  organizerId     String   @db.ObjectId
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   participants Parcitipant[]
