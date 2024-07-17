@@ -1,4 +1,4 @@
-import { FaUsers, FaInfoCircle, FaList, FaCheckCircle } from "react-icons/fa";
+import { FaUsers, FaList, FaInfoCircle, FaCheckCircle } from "react-icons/fa";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const QuickFindAnswers = () => {
@@ -46,7 +46,7 @@ const QuickFindAnswers = () => {
           <CardHeader className="flex flex-col items-center justify-center pb-3">
             <FaUsers className="h-4 w-4" />
             <CardTitle className="text-sm font-medium text-center">
-              Who can use Eventify?
+              Who can use Eventify ?
             </CardTitle>
           </CardHeader>
           <CardContent className="text-center">
