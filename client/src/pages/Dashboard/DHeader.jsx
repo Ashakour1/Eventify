@@ -62,7 +62,7 @@ const DHeader = () => {
           </Link>
 
           <Link
-            href="/events"
+            to="/events"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Events

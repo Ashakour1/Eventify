@@ -11,6 +11,7 @@ import prisma from "../config/db.js";
 
 export const createParcitipant = AsyncHandler(async (req, res) => {
   const { name, email, text, eventId } = req.body;
+  console.log(name, email, text, eventId);
 
   if (!name || !email || !text || !eventId) {
     res.status(400);

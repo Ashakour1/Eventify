@@ -21,7 +21,7 @@ const ParticipantRegistrationForm = () => {
     name: "",
     email: "",
     phone: "",
-    message: "",
+    text: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
@@ -29,7 +29,7 @@ const ParticipantRegistrationForm = () => {
   useEffect(() => {
     const fetchEventName = async () => {
       try {
-        const response = await axios.get(`/api/events/${eventId}`);
+        const response = await axios.get(`/api/events/events/${eventId}`);
         setEventName(response.data.title); // Assuming response.data contains event title
       } catch (error) {
         console.error("Error fetching event details:", error);
@@ -57,7 +57,7 @@ const ParticipantRegistrationForm = () => {
     if (!formData.phone) {
       errors.phone = "Phone is required";
     }
-    if (!formData.message) {
+    if (!formData.text) {
       errors.message = "Message is required";
     }
 
@@ -74,10 +74,19 @@ const ParticipantRegistrationForm = () => {
 
     setLoading(true);
     try {
+      const response = await axios.post("/api/participants/create/", {
+        ...formData,
+        eventId, // Include eventId in the form submission
+      });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        text: "",
+      });
       // Implement your form submission logic here
       console.log(formData);
       toast.success("Registration successful!");
-      // Example: Call an API to submit the form data
     } catch (error) {
       toast.error("Submission failed. Please try again.");
       console.error(error);
@@ -143,22 +152,12 @@ const ParticipantRegistrationForm = () => {
                 )}
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="eventName">Event Name</Label>
-                <Input
-                  type="text"
-                  id="eventName"
-                  name="eventName"
-                  value={eventName}
-                  readOnly
-                />
-              </div>
-              <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="message">Message</Label>
                 <Input
                   as="textarea"
-                  id="message"
-                  name="message"
-                  value={formData.message}
+                  id="text"
+                  name="text"
+                  value={formData.text}
                   onChange={handleChange}
                   placeholder="Enter your message"
                 />

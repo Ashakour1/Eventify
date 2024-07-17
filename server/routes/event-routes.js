@@ -11,7 +11,7 @@ const router = express.Router();
 
 // Routers
 router.get("/", getAllEvents);
-router.get("/event/:id", getSingleEvent);
+router.get("/events/:id", getSingleEvent);
 
 router.post("/create",authMiddleware, upload.single("image"), createEvent);
 

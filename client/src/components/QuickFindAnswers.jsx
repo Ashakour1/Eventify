@@ -1,7 +1,6 @@
 
 import { FaUsers, FaInfoCircle, FaCheckCircle, FaListAlt } from "react-icons/fa";
 
-import { FaUsers, FaList, FaInfoCircle, FaCheckCircle } from "react-icons/fa";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 

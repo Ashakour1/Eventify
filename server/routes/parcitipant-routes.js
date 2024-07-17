@@ -4,10 +4,10 @@ import {createParcitipant, getAllParticipants, getParticipantById, updatePartici
 const router = express.Router();
 
 // Routers
-router.get("/parcitipant", getAllParticipants);
-router.get("/parcitipant/:id", getParticipantById);
-router.post("/parcitipant", createParcitipant);
-router.put("/parcitipant", updateParticipant);
-router.delete("/parcitipant", deleteParticipant);
+router.get("/", getAllParticipants);
+router.get("/:id", getParticipantById);
+router.post("/create", createParcitipant);
+router.put("/", updateParticipant);
+router.delete("/", deleteParticipant);
 
 export default router;
