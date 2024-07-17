@@ -59,12 +59,14 @@ const Upcoming = () => {
                         {event.description}
                       </p>
                     </div>
-                    <Button
-                      variant="outline"
-                      className="mt-4 bg-customBlue text-white"
-                    >
-                      Register Now
-                    </Button>
+                    <Link to={`/participant/${event.id}`}>
+                      <Button
+                        variant="outline"
+                        className="mt-4 bg-customBlue text-white"
+                      >
+                        Register Now
+                      </Button>
+                    </Link>
                   </div>
                   <div
                     className="p-6 bg-no-repeat bg-center flex flex-col items-center justify-center w-full sm:w-2/3 md:w-1/2 lg:w-1/3"
