@@ -10,11 +10,15 @@ import prisma from "../config/db.js";
  */
 
 export const createParcitipant = AsyncHandler(async (req, res) => {
-  const { eventId } = req.body;
+  const { name, email, text, eventId } = req.body;
 
+  if (!name || !email || !text || !eventId) {
+    res.status(400);
+    throw new Error("Please fill all the fields");
+  }
   // Create participant
-  const parcitipant = await prisma.Parcitipant.create({
-    data: { eventId },
+  const parcitipant = await prisma.participant.create({
+    data: { name, email, text, eventId },
   });
 
   // Response
@@ -35,7 +39,7 @@ export const createParcitipant = AsyncHandler(async (req, res) => {
 
 export const getAllParticipants = AsyncHandler(async (req, res) => {
   // Get all participants
-  const participants = await prisma.Parcitipant.findMany();
+  const participants = await prisma.participant.findMany();
 
   // Response
   res.status(200).json({
@@ -57,7 +61,7 @@ export const getParticipantById = AsyncHandler(async (req, res) => {
   const { id } = req.params;
 
   // Get participant
-  const participant = await prisma.Parcitipant.findUnique({
+  const participant = await prisma.participant.findUnique({
     where: { id },
   });
 
@@ -78,12 +82,13 @@ export const getParticipantById = AsyncHandler(async (req, res) => {
  */
 
 export const updateParticipant = AsyncHandler(async (req, res) => {
-  const { id, eventId } = req.body;
+  const { id } = req.params;
+  const { name, email, text, eventId } = req.body;
 
   // Update participant
-  const participant = await prisma.Parcitipant.update({
+  const participant = await prisma.participant.update({
     where: { id },
-    data: { eventId },
+    data: { name, email, text, eventId },
   });
 
   // Response
@@ -93,7 +98,6 @@ export const updateParticipant = AsyncHandler(async (req, res) => {
     message: "Participant updated successfully",
   });
 });
-
 /**
  * @controller deleteParticipant
  * @method : DELETE
@@ -106,7 +110,7 @@ export const deleteParticipant = AsyncHandler(async (req, res) => {
   const { id } = req.params;
 
   // Delete participant
-  const participant = await prisma.Parcitipant.delete({
+  const participant = await prisma.participant.delete({
     where: { id },
   });
 
