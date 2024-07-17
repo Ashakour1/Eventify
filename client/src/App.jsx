@@ -8,9 +8,10 @@ import RegisterPage from "./pages/Register-page";
 import { Toaster } from "react-hot-toast";
 import NotFound from "./components/NotFound";
 import LoginPage from "./pages/Login-page";
-import { Dashboard } from "./pages/Dashboard";
+import { Dashboard } from "./pages/Dashboard/Dashboard";
 import QuickFindAnswers from "./components/QuickFindAnswers";
 import Upcoming from "./components/UpcomingEvents";
+import Events from "./components/Events";
 
 function App() {
   return (
@@ -62,6 +63,15 @@ function App() {
               <>
                 <Header />
                 <ContactPage />
+              </>
+            }
+          />
+          <Route
+            path="/events"
+            element={
+              <>
+                <Header />
+                <Events/>
               </>
             }
           />
