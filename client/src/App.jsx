@@ -12,6 +12,8 @@ import { Dashboard } from "./pages/Dashboard/Dashboard";
 import QuickFindAnswers from "./components/QuickFindAnswers";
 import Upcoming from "./components/UpcomingEvents";
 import Events from "./components/Events";
+import Invitations from "./pages/Dashboard/Invitations";
+import ParcitipantPage from "./pages/ParticipantPage";
 
 function App() {
   return (
@@ -26,7 +28,7 @@ function App() {
                 <Header />
                 <HeroSection />
                 <QuickFindAnswers />
-                <Upcoming/>
+                <Upcoming />
               </>
             }
           />
@@ -71,7 +73,7 @@ function App() {
             element={
               <>
                 <Header />
-                <Events/>
+                <Events />
               </>
             }
           />
@@ -81,6 +83,23 @@ function App() {
               <>
                 <Header />
                 <LoginPage />
+              </>
+            }
+          />
+          <Route
+            path="/invitations"
+            element={
+              <>
+                <Invitations />
+              </>
+            }
+          />
+          <Route
+            path="/participant/:eventId"
+            element={
+              <>
+                <Header />
+                <ParcitipantPage />
               </>
             }
           />
