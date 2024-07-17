@@ -1,10 +1,7 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
-
-import { useUser } from "../../Hooks/useUser";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-
 import {
   Card,
   CardContent,
@@ -12,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import {
   Table,
   TableBody,
@@ -23,7 +19,36 @@ import {
 } from "@/components/ui/table";
 import { Link } from "react-router-dom";
 import DHeader from "./DHeader";
+import emailjs from 'emailjs-com';
+import { toast } from "react-hot-toast";
+
+// Initialize EmailJS
+emailjs.init('x_gvnAKV-GAbfnznI'); // Replace with your EmailJS user ID (public key)
+
 const Invitations = () => {
+  const sendEmail = (email) => {
+    const templateParams = {
+      to_email: email,
+      to_name: "Liam Johnson", // You can dynamically set this if needed
+      from_name: "Your Company", // Replace with your company or dynamic value
+      message: "This is a test message." // Customize your message here
+    };
+
+    emailjs.send(
+      'service_7lxnoze', // Replace with your EmailJS service ID
+      'template_3jj4elq', // Replace with your EmailJS template ID
+      templateParams
+    )
+    .then((response) => {
+      console.log('Email sent successfully!', response.status, response.text);
+      toast.success('Email sent successfully!');
+    })
+    .catch((error) => {
+      console.error('Failed to send email.', error);
+      toast.error('Failed to send email.');
+    });
+  };
+
   return (
     <div>
       <DHeader />
@@ -36,7 +61,7 @@ const Invitations = () => {
             </CardDescription>
           </div>
           <Button asChild size="sm" className="ml-auto gap-1">
-            <Link href="#">
+            <Link to="#">
               View All
               <ArrowUpRight className="h-4 w-4" />
             </Link>
@@ -71,7 +96,7 @@ const Invitations = () => {
                 <TableCell className="text-right">Message</TableCell>
                 <TableCell className="text-right">Event</TableCell>
                 <TableCell className="text-right">
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" onClick={() => sendEmail("liam@example.com")}>
                     Send Email
                   </Button>
                 </TableCell>
