@@ -10,9 +10,9 @@ import upload from "../middlewares/upload-cloudinary.js";
 const router = express.Router();
 
 // Routers
-router.get("/event", getAllEvents);
+router.get("/", getAllEvents);
 router.get("/event/:id", getSingleEvent);
 
-router.post("/create", authMiddleware, upload.single("image"), createEvent);
+router.post("/create",authMiddleware, upload.single("image"), createEvent);
 
 export default router;
