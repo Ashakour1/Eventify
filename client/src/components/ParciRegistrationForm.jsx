@@ -4,7 +4,7 @@ import axios from "axios";
 
 const ParticipantRegistrationForm = () => {
   const { eventId } = useParams();
-  const [event, setEvent] = useState(null);
+  const [eventName, setEventName] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,16 +13,16 @@ const ParticipantRegistrationForm = () => {
   });
 
   useEffect(() => {
-    const fetchEventDetails = async () => {
+    const fetchEventName = async () => {
       try {
-        const response = await axios.get(`/api/events/:${eventId}`);
-        setEvent(response.data); // Assuming response.data contains event details
+        const response = await axios.get(`/api/events/${eventId}`);
+        setEventName(response.data.title); // Assuming response.data contains event title
       } catch (error) {
         console.error("Error fetching event details:", error);
       }
     };
 
-    fetchEventDetails();
+    fetchEventName();
   }, [eventId]);
 
   const handleChange = (e) => {
@@ -35,10 +35,6 @@ const ParticipantRegistrationForm = () => {
     console.log(formData);
     // Example: Call an API to submit the form data
   };
-
-  if (!event) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
@@ -79,7 +75,7 @@ const ParticipantRegistrationForm = () => {
           type="text"
           id="eventName"
           name="eventName"
-          value={event.title} // Assuming event.title contains the event name
+          value={eventName}
           readOnly
         />
 
