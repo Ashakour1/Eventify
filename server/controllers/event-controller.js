@@ -11,11 +11,11 @@ import cloudinary from "../config/cloudinary.js";
  */
 
 export const getAllEvents = AsyncHandler(async (req, res) => {
-    const events = await prisma.event.findMany();
-    res.status(200).json({
-        success: true,
-        data: events,
-    });
+  const events = await prisma.event.findMany();
+  res.status(200).json({
+    success: true,
+    data: events,
+  });
 });
 
 /**
@@ -27,72 +27,80 @@ export const getAllEvents = AsyncHandler(async (req, res) => {
  */
 
 export const getSingleEvent = AsyncHandler(async (req, res) => {
-    const event = await prisma.event.findUnique({
-        where: {
-            id: req.params.id,
-        },
-    });
-    res.status(200).json({
-        success: true,
-        data: event,
-    });
+  const event = await prisma.event.findUnique({
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.status(200).json({
+    success: true,
+    data: event,
+  });
 });
 
 export const createEvent = AsyncHandler(async (req, res) => {
-  const { title, description, date, time, location, image } = req.body;
-  const currentUser = req.user.id;
-  if (!title || !description || !date || !time || !location) {
-    res.status(400);
-    throw new Error("Please fill all the fields");
-  }
+  try {
+    const { title, description, date, time, location, eventType, link } =
+      req.body;
 
-  const eventExists = await prisma.event.findFirst({
-    where: {
-      title,
-    },
-  });
+    console.log(title, description, date, time, location);
 
-  if (eventExists) {
-    res.status(400);
-    throw new Error("Event already exists");
-  }
+    if (!title || !description || !date || !time || !location) {
+      res.status(400);
+      throw new Error("Please fill all the fields");
+    }
 
-  //   console.log("current" + currentUser);
+    const eventExists = await prisma.event.findFirst({
+      where: {
+        title,
+      },
+    });
 
-  let result;
-  if (req.file) {
-    let encodedImage = `data:image/jpg;base64,${req.file.buffer.toString(
-      "base64"
-    )}`;
-    try {
+    if (eventExists) {
+      res.status(400);
+      throw new Error("Event already exists");
+    }
+
+    const currentUser = req.user.id;
+    console.log(currentUser);
+
+    let result;
+
+    if (req.file) {
+      const encodedImage = `data:image/jpeg;base64,${req.file.buffer.toString(
+        "base64"
+      )}`;
+
       result = await cloudinary.uploader.upload(encodedImage, {
         resource_type: "image",
-        folder: "events",
-        transformation: { width: 500, height: 500, crop: "limit" },
-        encoding: "base64",
+        transformation: [{ width: 500, height: 500, crop: "limit" }],
       });
-    } catch (error) {
-      return res.status(500).json({ error: "Image upload failed" });
     }
+
+    const newEvent = await prisma.event.create({
+      data: {
+        title,
+        description,
+        date,
+        time,
+        location,
+        eventType,
+        link,
+        image: result?.url || null,
+        organizer: {
+          connect: {
+            id: currentUser,
+          },
+        }
+      },
+    });
+
+    res.status(201).json({
+      success: true,
+      data: newEvent,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
-
-  //   console.log(result.url)
-
-  const event = await prisma.event.create({
-    data: {
-      title,
-      description,
-      date,
-      time,
-      location,
-      image: result?.url || null,
-      organizer: { connect: { id: currentUser } },
-    },
-  });
-
-  res.status(200).json({
-    success: true,
-    message: "Event created successfully",
-    data: event,
-  });
 });
