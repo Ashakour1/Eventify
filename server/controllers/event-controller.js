@@ -38,6 +38,14 @@ export const getSingleEvent = AsyncHandler(async (req, res) => {
   });
 });
 
+/**
+ * @controller create event controller
+ * @method : POST
+ * @description : create event in database
+ * @route : /event
+ * @access : public
+ */
+
 export const createEvent = AsyncHandler(async (req, res) => {
   try {
     const { title, description, date, time, location, eventType, link } =
@@ -103,4 +111,59 @@ export const createEvent = AsyncHandler(async (req, res) => {
     console.error(error);
     res.status(500).json({ message: error.message });
   }
+});
+
+/*
+ * @controller update event controller
+ * @method : PUT
+ * @description : update event in database
+ * @route : /event/:id
+ * @access : public
+ */
+
+export const updateEvent = AsyncHandler(async (req, res) => {
+  const { id, title, description, date, time, location, eventType, link } =
+    req.body;
+  const event = await prisma.event.update({
+    where: {
+      id,
+    },
+    data: {
+      title,
+      description,
+      date,
+      time,
+      location,
+      eventType,
+      link,
+    },
+  });
+
+  // Response
+  res.status(200).json({
+    success: true,
+    data: event,
+  });
+});
+
+/*
+ * @controller delete event controller
+ * @method : DELETE
+ * @description : delete event from database
+ * @route : /event/:id
+ * @access : public
+ */
+
+export const deleteEvent = AsyncHandler(async (req, res) => {
+  const event = await prisma.event.delete({
+    where: {
+      id: req.params.id,
+    },
+  });
+
+  // Response
+  res.status(200).json({
+    success: true,
+    data: event,
+  });
 });
