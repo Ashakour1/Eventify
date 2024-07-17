@@ -1,4 +1,4 @@
-import { FaUsers, FaInfoCircle, FaList, FaCheckCircle } from "react-icons/fa";
+import { FaUsers, FaInfoCircle, FaCheckCircle, FaListAlt } from "react-icons/fa";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const QuickFindAnswers = () => {
@@ -29,7 +29,7 @@ const QuickFindAnswers = () => {
 
         <Card x-chunk="dashboard-01-chunk-1">
           <CardHeader className="flex flex-col items-center justify-center pb-3">
-            <FaList className="h-4 w-4" />
+            <FaListAlt className="h-4 w-4" />
             <CardTitle className="text-sm font-medium text-center">
               What features does Eventify offer?
             </CardTitle>
