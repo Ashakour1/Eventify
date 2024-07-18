@@ -27,7 +27,7 @@ export const getAllEvents = AsyncHandler(async (req, res) => {
  */
 
 export const getSingleEvent = AsyncHandler(async (req, res) => {
-  console.log(req.params.id);
+  // console.log(req.pa);
   const event = await prisma.event.findUnique({
     where: {
       id: req.params.id,
@@ -108,6 +108,7 @@ export const createEvent = AsyncHandler(async (req, res) => {
     res.status(201).json({
       success: true,
       data: newEvent,
+      message : "Event created successfully"
     });
   } catch (error) {
     console.error(error);
