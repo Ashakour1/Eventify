@@ -13,6 +13,6 @@ const router = express.Router();
 router.get("/", getAllEvents);
 router.get("/events/:id", getSingleEvent);
 
-router.post("/create",authMiddleware, upload.single("image"), createEvent);
+router.post("/",authMiddleware, upload.single("image"), createEvent);
 
 export default router;
