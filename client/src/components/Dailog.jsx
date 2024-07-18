@@ -58,13 +58,14 @@ const DialogComponent = () => {
 
     try {
       let response;
-      response = await axios.post("/api/events/create", form, {
+      response = await axios.post("/api/events/", form, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(response);
+      console.log(response.data.message);
       toast.success(response.data.message);
+
       setFormData({
         title: "",
         description: "",
@@ -72,10 +73,12 @@ const DialogComponent = () => {
         time: "",
         location: "",
         image: null,
+        eventType: "",
+        link: "",
       });
     } catch (err) {
       console.log(err);
-      toast.error(err.message);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -102,23 +105,23 @@ const DialogComponent = () => {
               />
             </div>
             <div className="flex gap-2">
-            <div className="w-full">
-              <Label htmlFor="description">Description</Label>
-              <Input
-                id="description"
-                value={formData.description}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="w-full">
-              <Label htmlFor="date">Date</Label>
-              <Input
-                id="date"
-                type="date"
-                value={formData.date}
-                onChange={handleChange}
-              />
-            </div>
+              <div className="w-full">
+                <Label htmlFor="description">Description</Label>
+                <Input
+                  id="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="w-full">
+                <Label htmlFor="date">Date</Label>
+                <Input
+                  id="date"
+                  type="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
             <div className="flex gap-2">
               <div className="w-full">
