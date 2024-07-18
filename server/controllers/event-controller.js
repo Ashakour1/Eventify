@@ -33,7 +33,10 @@ export const getSingleEvent = AsyncHandler(async (req, res) => {
       id: req.params.id,
     },
   });
-  console.log(event);
+  if (!event) {
+    res.status(404);
+    throw new Error("Event not found");
+  }
   res.status(200).json({
     success: true,
     data: event,
@@ -53,7 +56,7 @@ export const createEvent = AsyncHandler(async (req, res) => {
     const { title, description, date, time, location, eventType, link } =
       req.body;
 
-    console.log(title, description, date, time, location);
+    // console.log(title, description, date, time, location);
 
     if (!title || !description || !date || !time || !location) {
       res.status(400);
@@ -72,9 +75,9 @@ export const createEvent = AsyncHandler(async (req, res) => {
     }
 
     const currentUser = req.user.id;
-    console.log(currentUser);
+    // console.log(currentUser);
 
-    let result;
+    let result = null;
 
     if (req.file) {
       const encodedImage = `data:image/jpeg;base64,${req.file.buffer.toString(
@@ -101,14 +104,19 @@ export const createEvent = AsyncHandler(async (req, res) => {
           connect: {
             id: currentUser,
           },
-        }
+        },
       },
     });
+
+    if (!newEvent) {
+      res.status(400);
+      throw new Error("Event not created");
+    }
 
     res.status(201).json({
       success: true,
       data: newEvent,
-      message : "Event created successfully"
+      message: "Event created successfully",
     });
   } catch (error) {
     console.error(error);
