@@ -14,6 +14,7 @@ import Upcoming from "./components/UpcomingEvents";
 import Events from "./components/Events";
 import Invitations from "./pages/Dashboard/Invitations";
 import ParcitipantPage from "./pages/ParticipantPage";
+import EventsAdmin from "./pages/Dashboard/events";
 
 function App() {
   return (
@@ -87,7 +88,7 @@ function App() {
             }
           />
           <Route
-            path="/invitations"
+            path="/admin/invitations"
             element={
               <>
                 <Invitations />
@@ -104,6 +105,14 @@ function App() {
             }
           />
           <Route
+            path="/admin/events"
+            element={
+              <>
+                <EventsAdmin />
+              </>
+            }
+          />
+          <Route
             path="/dashboard"
             element={
               <>
@@ -111,7 +120,6 @@ function App() {
               </>
             }
           />
-          
         </Routes>
       </Router>
     </>

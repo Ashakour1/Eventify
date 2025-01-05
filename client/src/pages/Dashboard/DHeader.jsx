@@ -55,14 +55,14 @@ const DHeader = () => {
             Dashboard
           </Link>
           <Link
-            to="/invitations"
+            to="/admin/invitations"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Invitations
           </Link>
 
           <Link
-            to="/events"
+            to="/admin/events"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Events
@@ -82,7 +82,7 @@ const DHeader = () => {
           <SheetContent side="left">
             <nav className="grid gap-6 text-lg font-medium">
               <Link
-                href="#"
+                href="/"
                 className="flex items-center gap-2 text-lg font-semibold"
               >
                 <Package2 className="h-6 w-6" />
@@ -92,34 +92,22 @@ const DHeader = () => {
                 Dashboard
               </Link>
               <Link
-                href="#"
+                href="/invitations"
                 className="text-muted-foreground hover:text-foreground"
               >
                 Invitations
               </Link>
               <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Users
-              </Link>
-              <Link
-                href="#"
+                href="/customers"
                 className="text-muted-foreground hover:text-foreground"
               >
                 Customers
               </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Analytics
-              </Link>
             </nav>
           </SheetContent>
         </Sheet>
-        <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-          <form className="ml-auto flex-1 sm:flex-initial">
+        <div className="flex justify-end w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+          {/* <form className="ml-auto flex-1 sm:flex-initial">
             <div className="relative">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
@@ -128,7 +116,7 @@ const DHeader = () => {
                 className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
               />
             </div>
-          </form>
+          </form> */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">

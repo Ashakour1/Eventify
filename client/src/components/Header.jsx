@@ -17,7 +17,7 @@ const Header = () => {
       <div className="max-w-[1200px] mx-auto flex justify-between items-center ">
         <div className="logo">
           <Link to="/">
-            <p className="text-2xl font-bold text-blue-500">Eventify</p>
+            <p className="text-lg font-bold text-blue-500">Eventify</p>
           </Link>
         </div>
         <div className="hidden md:flex items-center space-x-3">

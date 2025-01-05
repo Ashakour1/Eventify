@@ -44,7 +44,31 @@ const Invitations = () => {
       to_email: participant.email,
       to_name: participant.name,
       from_name: "Eventify", // Replace with your company or dynamic value
-      message: `Hello ${participant.name}, this is your invitation message.`,
+      message: `Hello ${participant.name} from Eventify! We are glad to invite you to our ${participant.event} event. if you have any queries, please feel free to contact us.`, // Replace with your message
+    };
+
+    emailjs
+      .send(
+        "service_6ccwlak",
+        "template_via7s5b",
+        templateParams,
+        "46aiqSBPHs4x5ZgB1"
+      )
+      .then((response) => {
+        console.log("Email sent successfully!", response.status, response.text);
+        toast.success("Email sent successfully!");
+      })
+      .catch((error) => {
+        console.error("Failed to send email.", error);
+        toast.error("Failed to send email.");
+      });
+  };
+  const cencelInvite = (participant) => {
+    const templateParams = {
+      to_email: participant.email,
+      to_name: participant.name,
+      from_name: "Eventify", // Replace with your company or dynamic value
+      message: `Hello ${participant.name} from Eventify! We are sorry to inform you that your invitation to our ${participant.event} event has been cancelled. if you have any queries, please feel free to contact us.`, // Replace with your message
     };
 
     emailjs
@@ -120,6 +144,13 @@ const Invitations = () => {
                       onClick={() => sendEmail(participant)}
                     >
                       Send Email
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => cencelInvite(participant)}
+                    >
+                      Cancel invite
                     </Button>
                   </TableCell>
                 </TableRow>

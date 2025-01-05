@@ -11,6 +11,10 @@ import cloudinary from "../config/cloudinary.js";
  */
 
 export const getAllEvents = AsyncHandler(async (req, res) => {
+  const { id } = req.user;
+
+  console.log(id);
+
   const events = await prisma.event.findMany();
   res.status(200).json({
     success: true,
