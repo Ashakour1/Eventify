@@ -15,6 +15,7 @@ import Events from "./components/Events";
 import Invitations from "./pages/Dashboard/Invitations";
 import ParcitipantPage from "./pages/ParticipantPage";
 import EventsAdmin from "./pages/Dashboard/events";
+import EventForm from "./pages/Dashboard/EventForm";
 
 function App() {
   return (
@@ -120,6 +121,23 @@ function App() {
               </>
             }
           />
+          <Route
+          path="/admin/event/add"
+          element={
+            <>
+              <EventForm />
+            </>
+          }
+        />
+         <Route
+          path="/admin/event/edit/:id"
+          element={
+            <>
+              <EventForm />
+            </>
+          }
+        />
+
         </Routes>
       </Router>
     </>
