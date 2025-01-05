@@ -49,6 +49,7 @@ model Participant {
   text String 
   event     event   @relation(fields: [eventId], references: [id])
   eventId   String  @db.ObjectId
+  status   String @default("pending")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
