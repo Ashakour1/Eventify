@@ -11,8 +11,11 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import Dailog from "@/components/Dailog";
+import { Link, useNavigate } from "react-router-dom";
 const EventsAdmin = () => {
   const [events, setEvents] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,8 +67,13 @@ const EventsAdmin = () => {
       <DHeader />
       <div className="container mx-auto p-6">
         <div className="flex justify-between items-center mb-10">
-          <h1 className="text-xl font-bold">Events</h1>
-          <Dailog className="" />
+          <div className="flex flex-col">
+            <h1 className="text-xl font-bold">Events</h1>
+            <p>You have {events.length} events </p>
+          </div>
+          <Link to="/admin/event/add">
+            <Button>Create Event</Button>
+          </Link>
         </div>
         <div className="overflow-x-auto">
           <Table>
@@ -89,7 +97,7 @@ const EventsAdmin = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => handleEdit(event.id)}
+                      onClick={() => navigate(`/admin/event/edit/${event.id}`)}
                     >
                       Edit
                     </Button>
