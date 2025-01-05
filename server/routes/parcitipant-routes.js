@@ -1,5 +1,11 @@
 import express from "express";
-import {createParcitipant, getAllParticipants, getParticipantById, updateParticipant, deleteParticipant} from "../controllers/parcitipant-controller.js";
+import {
+  createParcitipant,
+  getAllParticipants,
+  getParticipantById,
+  updateParticipant,
+  deleteParticipant,
+} from "../controllers/parcitipant-controller.js";
 
 const router = express.Router();
 
@@ -7,7 +13,7 @@ const router = express.Router();
 router.get("/", getAllParticipants);
 router.get("/:id", getParticipantById);
 router.post("/create", createParcitipant);
-router.put("/", updateParticipant);
+router.put("/:id", updateParticipant);
 router.delete("/", deleteParticipant);
 
 export default router;
