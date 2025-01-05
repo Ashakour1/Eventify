@@ -119,7 +119,7 @@ const Invitations = () => {
   };
 
   return (
-    <div>
+    <div className="p-6">
       <DHeader />
       <div className="container mx-auto p-6 xl:col-span-2">
         <h1 className="text-2xl font-bold mb-4">Participants Invitations</h1>
