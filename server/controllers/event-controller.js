@@ -158,6 +158,7 @@ export const updateEvent = AsyncHandler(async (req, res) => {
   res.status(200).json({
     success: true,
     data: event,
+    message: "Event updated successfully",
   });
 });
 
