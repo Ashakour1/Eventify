@@ -63,7 +63,7 @@ const EventsAdmin = () => {
   };
 
   return (
-    <div>
+    <div className="p-6">
       <DHeader />
       <div className="container mx-auto p-6">
         <div className="flex justify-between items-center mb-10">
