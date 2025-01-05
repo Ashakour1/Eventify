@@ -10,16 +10,16 @@ import prisma from "../config/db.js";
  */
 
 export const createParcitipant = AsyncHandler(async (req, res) => {
-  const { name, email, text, eventId } = req.body;
-  console.log(name, email, text, eventId);
+  const { name, email, text, status, eventId } = req.body;
+  console.log(name, email, status, text, eventId);
 
-  if (!name || !email || !text || !eventId) {
+  if (!name || !email || !text || !status || !eventId) {
     res.status(400);
     throw new Error("Please fill all the fields");
   }
   // Create participant
   const parcitipant = await prisma.participant.create({
-    data: { name, email, text, eventId },
+    data: { name, email, text, status, eventId },
   });
 
   // Response
@@ -84,12 +84,12 @@ export const getParticipantById = AsyncHandler(async (req, res) => {
 
 export const updateParticipant = AsyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { name, email, text, eventId } = req.body;
+  const { name, email, text, status, eventId } = req.body;
 
   // Update participant
   const participant = await prisma.participant.update({
     where: { id },
-    data: { name, email, text, eventId },
+    data: { name, email, status, text, eventId },
   });
 
   // Response
